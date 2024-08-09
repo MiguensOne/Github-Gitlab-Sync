@@ -1,11 +1,7 @@
-import os
 import gitlab
 import time
 
-GITLAB_URL = os.environ.get('GITLAB_URL', None); assert GITLAB_URL is not None 
-PRIVATE_TOKEN = os.environ.get('PRIVATE_TOKEN', None); assert PRIVATE_TOKEN is not None
-PROJECT_ID = os.environ.get('PROJECT_ID', None); assert PROJECT_ID is not None
-POLL_INTERVAL = os.environ.get('POLL_INTERVAL', 10)
+import common
 
 # Initialize the GitLab connection
 gl = gitlab.Gitlab(GITLAB_URL, private_token=PRIVATE_TOKEN)
@@ -15,6 +11,7 @@ project = gl.projects.get(PROJECT_ID)
 
 # Trigger the pull mirror update
 project.mirror_pull()
+time.sleep(POLL_INTERVAL)
 
 # Wait for the sync to complete
 while True:
