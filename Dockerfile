@@ -12,3 +12,5 @@ WORKDIR /opt/bridge
 
 # Copy all the Python files to the working directory
 COPY *.py /opt/bridge/
+
+ENTRYPOINT [ "/bin/bash" ]
