@@ -1,4 +1,4 @@
-import common
+from common import *
 import os
 
 PIPELINE_ID = os.environ.get('PIPELINE_ID', None); assert PIPELINE_ID is not None, "PIPELINE_ID environment variable is not set"

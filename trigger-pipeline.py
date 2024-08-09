@@ -1,6 +1,7 @@
 import os
-import common
+from common import *
 import time
+import gitlab
 
 # Get the commit ref from the environment variable
 COMMIT_REF = os.getenv.get("COMMIT_REF", None); assert COMMIT_REF is not None, "COMMIT_REF environment variable is not set"

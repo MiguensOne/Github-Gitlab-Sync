@@ -1,6 +1,7 @@
 import os
-import common
+from common import *
 import time
+import gitlab
 
 PIPELINE_ID = os.getenv.get("PIPELINE_ID", None); assert PIPELINE_ID is not None, "PIPELINE_ID environment variable is not set"
 

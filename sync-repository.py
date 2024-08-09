@@ -1,7 +1,7 @@
 import gitlab
 import time
 
-import common
+from common import *
 
 # Initialize the GitLab connection
 gl = gitlab.Gitlab(GITLAB_URL, private_token=PRIVATE_TOKEN)

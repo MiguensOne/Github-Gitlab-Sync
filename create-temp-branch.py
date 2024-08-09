@@ -1,10 +1,8 @@
+from common import *
+
 import gitlab
 
-# Configuration
-GITLAB_URL = "https://gitlab.com"
-PRIVATE_TOKEN = "your_private_token"
-PROJECT_ID = "your_project_id"
-COMMIT_REF = "your_commit_ref"  # The commit hash to base the new branch on
+COMMIT_REF = os.getenv.get("COMMIT_REF", None); assert COMMIT_REF is not None, "COMMIT_REF environment variable is not set"
 
 # Initialize GitLab connection
 gl = gitlab.Gitlab(GITLAB_URL, private_token=PRIVATE_TOKEN)
