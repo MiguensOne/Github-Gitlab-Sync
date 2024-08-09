@@ -3,7 +3,7 @@ from common import *
 import time
 import gitlab
 
-PIPELINE_ID = os.getenv.get("PIPELINE_ID", None); assert PIPELINE_ID is not None, "PIPELINE_ID environment variable is not set"
+PIPELINE_ID = os.environ.get("PIPELINE_ID", None); assert PIPELINE_ID is not None, "PIPELINE_ID environment variable is not set"
 
 # Initialize GitLab connection
 gl = gitlab.Gitlab(GITLAB_URL, private_token=PRIVATE_TOKEN)
