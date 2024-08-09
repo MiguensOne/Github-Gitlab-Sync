@@ -3,17 +3,13 @@ import time
 
 from common import *
 
-# Initialize the GitLab connection
 gl = gitlab.Gitlab(GITLAB_URL, private_token=PRIVATE_TOKEN)
 
-# Get the project
 project = gl.projects.get(PROJECT_ID)
 
-# Trigger the pull mirror update
 project.mirror_pull()
 time.sleep(POLL_INTERVAL)
 
-# Wait for the sync to complete
 while True:
     mirror_pull_details = project.mirror_pull_details()
     mirror_status = mirror_pull_details['update_status']
