@@ -18,7 +18,7 @@ jobs:
         echo $password | docker login --username $username --password-stdin $registry
         chmod +x ./build.sh
         ./build.sh
-      with:
+      env:
         registry: ghcr.io
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
