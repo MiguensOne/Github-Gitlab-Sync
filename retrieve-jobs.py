@@ -12,6 +12,11 @@ pipeline = project.pipelines.get(PIPELINE_ID)
 
 jobs = pipeline.jobs.list(all=True)
 
-for job in jobs:
-    print(f"{job.id}:{job.name}")
-    
+jobs_list = []
+
+for i in jobs:
+    id = str(i.id)
+    name = str(i.name).replace(' ', '_')
+    jobs_list.append(str(f"{name} #{id}"))
+
+print(','.join(jobs_list))

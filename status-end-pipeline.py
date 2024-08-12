@@ -10,9 +10,7 @@ project = gl.projects.get(PROJECT_ID)
 
 pipeline = project.pipelines.get(PIPELINE_ID)
 
-while pipeline.status not in ['success', 'failed', 'canceled']:
-    pipeline.refresh()
-    print(f"Pipeline status: {pipeline.status}")
-    time.sleep(POLL_INTERVAL)
-
 print(f"Pipeline finished with status: {pipeline.status}")
+
+if pipeline.status != 'success':
+    exit(1)
