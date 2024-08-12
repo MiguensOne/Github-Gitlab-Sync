@@ -11,7 +11,7 @@ project = gl.projects.get(PROJECT_ID)
 
 job = project.jobs.get(JOB_ID)
 
-while job.status not in ['success', 'failed', 'canceled']:
+while job.status not in ['success', 'failed', 'canceled', 'skipped']:
     time.sleep(POLL_INTERVAL)
     job.refresh()
 
@@ -19,6 +19,8 @@ log_binary = job.trace()
 log_decoded = log_binary.decode('utf-8')
 
 print(log_decoded)
+
+print(f"GITLAB JOB STATUS: {job.status}")
 
 if job.status != 'success':
     exit(1)
