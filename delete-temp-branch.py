@@ -2,7 +2,8 @@ from common import *
 
 import gitlab
 
-COMMIT_REF = os.environ.get("COMMIT_REF", None); assert COMMIT_REF is not None, "COMMIT_REF environment variable is not set"
+COMMIT_REF = os.environ.get("COMMIT_REF", None)
+assert COMMIT_REF is not None, "COMMIT_REF environment variable is not set"
 
 gl = gitlab.Gitlab(GITLAB_URL, private_token=PRIVATE_TOKEN)
 

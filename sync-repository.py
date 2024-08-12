@@ -13,12 +13,14 @@ project = gl.projects.get(PROJECT_ID)
 project.mirror_pull()
 time.sleep(POLL_INTERVAL)
 
+
 def is_commit_present(project, commit_ref):
     try:
         commit = project.commits.get(commit_ref)
         return True if commit else False
     except gitlab.exceptions.GitlabGetError:
         return False
+
 
 # Poll the repository to check if the commit is present
 while True:

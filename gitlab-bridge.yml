@@ -1,6 +1,6 @@
 name: Gitlab Pipeline Integration
 
-on:   
+on:
   push:
   workflow_dispatch:
 

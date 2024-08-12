@@ -26,4 +26,3 @@ jobs:
         REGISTRY: ghcr.io
         USERNAME: ${{ github.actor }}
         PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-    
