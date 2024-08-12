@@ -10,6 +10,7 @@ project = gl.projects.get(PROJECT_ID)
 
 pipeline = project.pipelines.get(PIPELINE_ID)
 
+print(f"Pipeline URL: {pipeline.web_url}")
 print(f"Pipeline finished with status: {pipeline.status}")
 
 if pipeline.status != 'success':
