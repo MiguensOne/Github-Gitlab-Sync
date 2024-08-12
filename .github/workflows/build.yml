@@ -15,10 +15,11 @@ jobs:
 
     - name: Run build script
       run: |
-        echo $password | docker login --username $username --password-stdin $registry
+        echo "$PASSWORD" | docker login --username "$USERNAME" --password-stdin "$REGISTRY"
         chmod +x ./build.sh
         ./build.sh
       env:
-        registry: ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        REGISTRY: ghcr.io
+        USERNAME: ${{ github.actor }}
+        PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+    
