@@ -23,7 +23,7 @@ This project enables you to run Gitlab Pipelines from Github Actions, allowing y
 
 ### Gitlab CI/CD
 
-- **Job Naming**: Job names with special characters are automatically sanitized. Spaces will be mapped with underscores, and square brackets `[]` will be removed.
+- **Job Naming**: Job names with special characters are automatically sanitized. Spaces are replaced with underscores, and special characters (like `[]`, `:`, `@`, `/`, `()`, etc.) are removed. Hyphens and alphanumeric characters are preserved.
 - **Avoid Double Triggering**: Use a top-level condition `CI_PIPELINE_SOURCE == "api"` to avoid double triggering (via API and branch creation).
 
 ## Requirements
