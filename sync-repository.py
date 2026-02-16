@@ -10,7 +10,7 @@ assert COMMIT_REF is not None, "COMMIT_REF environment variable is not set"
 gl = gitlab.Gitlab(GITLAB_URL, private_token=PRIVATE_TOKEN)
 project = gl.projects.get(PROJECT_ID)
 
-project.mirror_pull()
+project.pull_mirror.start()
 time.sleep(POLL_INTERVAL)
 
 
