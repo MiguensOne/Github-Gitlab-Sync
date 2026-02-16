@@ -19,9 +19,8 @@ jobs_list = []
 
 for i in jobs:
     id = str(i.id)
-    # Sanitize job name: keep only alphanumeric, spaces, hyphens, and underscores
-    # Note: \w includes underscores, so existing underscores are preserved
-    name = re.sub(r'[^\w\s-]', '', str(i.name))  # Remove special chars
+    # Sanitize job name to be valid for GitHub Actions
+    name = re.sub(r'[^\w\s-]', '', str(i.name))  # Keep alphanumeric, spaces, hyphens, underscores
     name = name.replace(" ", "_")  # Replace spaces with underscores
     name = re.sub(r'_+', '_', name)  # Collapse multiple underscores
     name = name.strip('_-')  # Remove leading/trailing underscores and hyphens
