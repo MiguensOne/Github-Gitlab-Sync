@@ -19,9 +19,15 @@ jobs_list = []
 
 for i in jobs:
     id = str(i.id)
-    # Sanitize job name: replace spaces with underscores, remove brackets and other special chars
-    name = re.sub(r'[^\w\s-]', '', str(i.name))  # Remove special chars except word chars, spaces, hyphens
+    # Sanitize job name: keep only alphanumeric, spaces, hyphens, and underscores
+    # Note: \w includes underscores, so existing underscores are preserved
+    name = re.sub(r'[^\w\s-]', '', str(i.name))  # Remove special chars
     name = name.replace(" ", "_")  # Replace spaces with underscores
+    name = re.sub(r'_+', '_', name)  # Collapse multiple underscores
+    name = name.strip('_-')  # Remove leading/trailing underscores and hyphens
+    # Fallback for empty names
+    if not name:
+        name = f"job_{id}"
     jobs_list.append(str(f"{name} #{id}"))
 
 print(json.dumps(jobs_list))
