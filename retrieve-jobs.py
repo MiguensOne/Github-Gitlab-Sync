@@ -1,5 +1,6 @@
 from common import *
 import os
+import json
 import gitlab
 
 PIPELINE_ID = os.environ.get("PIPELINE_ID", None)
@@ -17,7 +18,7 @@ jobs_list = []
 
 for i in jobs:
     id = str(i.id)
-    name = str(i.name).replace(" ", "_")
+    name = str(i.name).replace(" ", "_").replace("[", "").replace("]", "")
     jobs_list.append(str(f"{name} #{id}"))
 
-print(",".join(jobs_list))
+print(json.dumps(jobs_list))
