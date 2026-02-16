@@ -1,5 +1,4 @@
 import os
-import urllib.parse
 
 GITLAB_URL = os.environ.get("GITLAB_URL", None)
 assert GITLAB_URL is not None
