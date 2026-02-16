@@ -1,5 +1,7 @@
 from common import *
 import os
+import json
+import re
 import gitlab
 
 PIPELINE_ID = os.environ.get("PIPELINE_ID", None)
@@ -17,7 +19,14 @@ jobs_list = []
 
 for i in jobs:
     id = str(i.id)
-    name = str(i.name).replace(" ", "_")
+    # Sanitize job name to be valid for GitHub Actions
+    name = re.sub(r'[^\w\s-]', '', str(i.name))  # Keep alphanumeric, spaces, hyphens, underscores
+    name = name.replace(" ", "_")  # Replace spaces with underscores
+    name = re.sub(r'_+', '_', name)  # Collapse multiple underscores
+    name = name.strip('_-')  # Remove leading/trailing underscores and hyphens
+    # Fallback for empty names
+    if not name:
+        name = f"job_{id}"
     jobs_list.append(str(f"{name} #{id}"))
 
-print(",".join(jobs_list))
+print(json.dumps(jobs_list))
