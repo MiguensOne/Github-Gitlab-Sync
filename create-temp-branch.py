@@ -9,7 +9,7 @@ gl = gitlab.Gitlab(GITLAB_URL, private_token=PRIVATE_TOKEN)
 
 project = gl.projects.get(PROJECT_ID)
 
-new_branch_name = f"pipeline-bridge/{COMMIT_REF}"
+new_branch_name = f"pipeline-bridge/{sanitize_ref_for_branch_name(COMMIT_REF)}"
 
 try:
     branch = project.branches.create({"branch": new_branch_name, "ref": COMMIT_REF})

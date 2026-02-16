@@ -12,7 +12,7 @@ gl = gitlab.Gitlab(GITLAB_URL, private_token=PRIVATE_TOKEN)
 
 project = gl.projects.get(PROJECT_ID)
 
-pipeline = project.pipelines.create({"ref": f"pipeline-bridge/{COMMIT_REF}"})
+pipeline = project.pipelines.create({"ref": f"pipeline-bridge/{sanitize_ref_for_branch_name(COMMIT_REF)}"})
 print(f"{pipeline.id}")
 print(f"GITLAB PIPELINE LINK {pipeline.web_url}", file=sys.stderr)
 time.sleep(POLL_INTERVAL)
