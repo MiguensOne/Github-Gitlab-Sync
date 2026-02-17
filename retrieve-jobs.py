@@ -17,16 +17,26 @@ jobs = pipeline.jobs.list(all=True)
 
 jobs_list = []
 
-for i in jobs:
-    id = str(i.id)
-    # Sanitize job name to be valid for GitHub Actions
-    name = re.sub(r'[^\w\s-]', '', str(i.name))  # Keep alphanumeric, spaces, hyphens, underscores
-    name = name.replace(" ", "_")  # Replace spaces with underscores
-    name = re.sub(r'_+', '_', name)  # Collapse multiple underscores
-    name = name.strip('_-')  # Remove leading/trailing underscores and hyphens
-    # Fallback for empty names
-    if not name:
-        name = f"job_{id}"
-    jobs_list.append(str(f"{name} #{id}"))
+def build_github_key(job_name: str, job_id: str) -> str:
+    raw_key = f"{job_name}_{job_id}"
+    key = re.sub(r"[^\w-]", "_", raw_key)
+    key = re.sub(r"_+", "_", key)
+    key = key.strip("_-")
+    if not key:
+        key = f"job_{job_id}"
+    return key
 
-print(json.dumps(jobs_list))
+
+for i in jobs:
+    job_id = str(i.id)
+    job_name = str(i.name)
+    key = build_github_key(job_name, job_id)
+    jobs_list.append(
+        {
+            "name": job_name,
+            "JOB_ID": job_id,
+            "key": key,
+        }
+    )
+
+print(json.dumps(jobs_list, separators=(",", ":")))
