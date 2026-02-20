@@ -23,5 +23,5 @@ print(log_decoded)
 
 print(f"GITLAB JOB STATUS: {job.status}")
 
-if job.status != "success":
+if job.status != "success" and job.status != "manual":
     exit(1)
